@@ -4,6 +4,9 @@ A full-stack, real-time multiplayer chess application built with **Blazor**, **A
 
 This repository contains a decoupled solution architecture featuring a dedicated backend Web API/SignalR Hub and a WebAssembly/Blazor client frontend.
 
+## Architecture & Flow
+<img width="492" height="242" alt="flow" src="https://github.com/user-attachments/assets/e61aba3e-994e-4538-93ac-d1d733cdc6de" />
+
 ---
 
 ## Features
