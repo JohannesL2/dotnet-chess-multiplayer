@@ -1,7 +1,49 @@
 ﻿@page "/"
+@inject NavigationManager Navigation
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Home - Chess Multiplayer</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="hero-container">
+    <div class="hero-content">
+        <h1 class="hero-title">♟️ Chess Multiplayer</h1>
+        <p class="hero-subtitle">
+            Play chess in real-time with friends! Create a room, share the code, and start your match instantly.
+        </p>
 
-Welcome to your new app.
+        <div class="action-cards">
+            <div class="action-card primary">
+                <p>Create a room and invite a friend with a unique room code.</p>
+                <button class="btn btn-primary" @onclick="GoToGame">
+                    Create or Join Game
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="features-section">
+    <h2>Features in the Game</h2>
+    <div class="features-grid">
+        <div class="feature-item">
+            <h4>Real-time via SignalR</h4>
+            <p>Fast and smooth moves without delay between players.</p>
+        </div>
+        <div class="feature-item">
+            <h4>Easy to Invite</h4>
+            <p>Just share the room code with your opponent to start playing immediately.</p>
+        </div>
+        <div class="feature-item">
+            <h4>Rule Validation</h4>
+            <p>Automatic support for valid moves and turn order via ChessDotNet.</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void GoToGame()
+    {
+        Navigation.NavigateTo("/game");
+    }
+}

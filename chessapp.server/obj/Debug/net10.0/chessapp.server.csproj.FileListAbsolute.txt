@@ -31,3 +31,4 @@
 /Users/johanneslindgren/Desktop/ws/chessapp/chessapp.server/obj/Debug/net10.0/chessapp.server.pdb
 /Users/johanneslindgren/Desktop/ws/chessapp/ChessApp.Server/obj/Debug/net10.0/chessapp.server.genruntimeconfig.cache
 /Users/johanneslindgren/Desktop/ws/chessapp/ChessApp.Server/obj/Debug/net10.0/ref/chessapp.server.dll
+/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.server/obj/Debug/net10.0/chessapp.server.sourcelink.json

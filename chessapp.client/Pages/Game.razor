@@ -6,17 +6,61 @@
 
 <h3>Multiplayer Chess</h3>
 
+@if (!hasJoinedRoom)
+{
+    <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; max-width: 400px; border-radius: 8px;">
+        <h4>Choose Game Mode</h4>
+        <button @onclick="CreateRoom" style="padding: 8px 16px; margin-bottom: 12px; cursor: pointer;">
+            🎲 Create new room
+        </button>
+        
+        <hr style="margin: 15px 0;" />
+
+        <div>
+            <label style="display: block; margin-bottom: 5px;">Enter Room Code:</label>
+            <input @bind="inputRoomId" placeholder="e.g., A8X2K9" style="padding: 6px; width: 160px; text-transform: uppercase;" />
+            <button @onclick="JoinRoom" style="padding: 6px 12px; cursor: pointer;">Join Room</button>
+        </div>
+    </div>
+}
+
 @if (hubConnection?.State == HubConnectionState.Connected)
 {
-    <p style="color: green;">Connected to the server!</p>
-    
-    <ChessBoard Fen="@currentFen" OnMoveMade="HandleMoveMade" />
+    @if (hasJoinedRoom)
+    {
+        <div style="margin-bottom: 15px; padding: 12px; border-radius: 8px; background-color: #f8f9fa; border: 1px solid #e9ecef; max-width: 500px;">
+            <p style="margin: 0 0 5px 0;">Active Room: <strong style="font-size: 1.2em; color: #2b5286;">@currentRoomCode</strong></p>
+            <p style="margin: 0 0 8px 0; color: green;">You are playing as: <strong>@myColor</strong></p>
 
-    <p>Latest move/notation: <code>@lastMove</code></p>
+            @if (!isGameReady)
+            {
+                <div style="background-color: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; border: 1px solid #ffeeba;">
+                    ⏳ <strong>Waiting for opponent...</strong>
+                    <br />
+                    <small>Share the room code <strong>@currentRoomCode</strong> with a friend to start the game.</small>
+                </div>
+            }
+            else
+            {
+                <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                    <strong>Opponent has joined!</strong> The game has started.
+                </div>
+            }
+        </div>
+
+        <ChessBoard Fen="@currentFen"
+                    OnMoveMade="HandleMoveMade"
+                    isFlipped="@(myColor == "Black")" />
+
+        <p>Senaste drag: <code>@lastMove</code></p>
+    }
+
     @if (!string.IsNullOrEmpty(errorMessage))
-{
-    <p style="color: red; font-weight: bold;">@errorMessage</p>
-}
+    {
+        <p style="color: red; font-weight: bold; background-color: #fee; padding: 10px; border-radius: 4px; border: 1px solid #f99;">
+            @errorMessage
+        </p>
+    }
 }
 else
 {
@@ -29,63 +73,155 @@ else
     private string errorMessage = string.Empty;
     private string currentFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private string lastMove = "";
-    
+
+    private string myColor = "";
+    private string inputRoomId = "";
+    private string currentRoomCode = "";
+    private bool hasJoinedRoom = false;
+    private bool isGameReady = false;
+
     protected override async Task OnInitializedAsync()
-{
-    chessGame = new ChessGame();
-    currentFen = chessGame.GetFen();
-
-    hubConnection = new HubConnectionBuilder()
-        .WithUrl("http://localhost:5180/chessHub")
-        .WithAutomaticReconnect()
-        .Build();
-
-    hubConnection.On<string>("ReceiveMove", (newFen) =>
     {
-        currentFen = newFen;
-        
-        chessGame = new ChessGame(newFen);
-        errorMessage = "";
-        
-        StateHasChanged();
-    });
+        chessGame = new ChessGame();
+        currentFen = chessGame.GetFen();
 
-    await hubConnection.StartAsync();
-    await hubConnection.SendAsync("JoinGame", "room-123");
-}
+        ResetGameState();
 
-private async Task HandleMoveMade(string moveNotation)
-{
-    lastMove = moveNotation;
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:5180/chessHub")
+            .WithAutomaticReconnect()
+            .Build();
 
-    var parts = moveNotation.Split('-');
-    if (parts.Length != 2) return;
-
-    try
-    {
-        var move = new Move(parts[0].ToUpper(), parts[1].ToUpper(), chessGame.WhoseTurn);
-
-        if (chessGame.IsValidMove(move))
+        hubConnection.On<string>("AssignColor", (color) =>
         {
-            chessGame.MakeMove(move, true);
-            currentFen = chessGame.GetFen();
+            myColor = color;
+            hasJoinedRoom = true;
+            isGameReady = false;
             errorMessage = "";
+            StateHasChanged();
+        });
 
-            if (hubConnection is not null)
+        hubConnection.On("GameStarted", () =>
+        {
+            isGameReady = true;
+            errorMessage = "";
+            StateHasChanged();
+        });
+
+        hubConnection.On<string>("RoomError", (msg) =>
+        {
+            errorMessage = msg;
+            hasJoinedRoom = false;
+            StateHasChanged();
+        });
+
+        hubConnection.On<string>("MoveError", (msg) =>
+        {
+            errorMessage = msg;
+            StateHasChanged();
+        });
+
+        hubConnection.On<string>("ReceiveMove", (newFen) =>
+        {
+            currentFen = newFen;
+            chessGame = new ChessGame(newFen);
+            errorMessage = "";
+            StateHasChanged();
+        });
+
+        hubConnection.On<string>("RoomDestroyed", (msg) =>
+        {
+            ResetGameState();
+            errorMessage = msg;
+            hasJoinedRoom = false;
+            currentRoomCode = "";
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    private void ResetGameState()
+    {
+        chessGame = new ChessGame();
+        currentFen = chessGame.GetFen();
+        lastMove = "";
+        myColor = "";
+        errorMessage = "";
+        isGameReady = false;
+    }
+
+    private async Task CreateRoom()
+{
+    if (hubConnection is null) return;
+
+    errorMessage = "";
+    ResetGameState();
+    hasJoinedRoom = false;
+    StateHasChanged();
+
+    currentRoomCode = await hubConnection.InvokeAsync<string>("CreateRoom");
+    
+    }
+
+    private async Task JoinRoom()
+    {
+        if (string.IsNullOrWhiteSpace(inputRoomId) || hubConnection is null) return;
+
+        errorMessage = "";
+
+        ResetGameState();
+        currentRoomCode = inputRoomId.Trim().ToUpper();
+        await hubConnection.SendAsync("JoinRoom", currentRoomCode);
+    }
+
+    private async Task HandleMoveMade(string moveNotation)
+    {
+        if (!isGameReady)
+        {
+            errorMessage = "Game has not started yet. Wait for your opponent to join.";
+            return;
+        }
+
+        bool isMyTurn = (myColor == "White" && chessGame.WhoseTurn == Player.White) ||
+                        (myColor == "Black" && chessGame.WhoseTurn == Player.Black);
+
+        if (!isMyTurn)
+        {
+            errorMessage = $"It's not your turn! You are playing as {myColor}.";
+            return;
+        }
+
+        lastMove = moveNotation;
+
+        var parts = moveNotation.Split('-');
+        if (parts.Length != 2) return;
+
+        try
+        {
+            var move = new Move(parts[0].ToUpper(), parts[1].ToUpper(), chessGame.WhoseTurn);
+
+            if (chessGame.IsValidMove(move))
             {
-                await hubConnection.SendAsync("SendMove", "room-123", currentFen);
+                chessGame.MakeMove(move, true);
+                currentFen = chessGame.GetFen();
+                errorMessage = "";
+
+                if (hubConnection is not null)
+                {
+                    await hubConnection.SendAsync("SendMove", currentRoomCode, currentFen);
+                }
+            }
+            else
+            {
+                errorMessage = "Invalid move!";
             }
         }
-        else
+        catch (Exception ex)
         {
-            errorMessage = "Invalid move!";
+            errorMessage = $"Error making move: {ex.Message}";
         }
     }
-    catch (Exception ex)
-    {
-        errorMessage = $"Error processing move: {ex.Message}";
-    }
-}
 
     public async ValueTask DisposeAsync()
     {

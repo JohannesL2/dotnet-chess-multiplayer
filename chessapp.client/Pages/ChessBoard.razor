@@ -3,8 +3,8 @@
     {
         @for (int col = 0; col < 8; col++)
         {
-            int r = row;
-            int c = col;
+            int r = isFlipped ? 7 - row : row;
+            int c = isFlipped ? 7 - col : col;
             bool isDark = (r + c) % 2 != 0;
             char piece = boardGrid[r, c];
             bool isSelected = selectedRow == r && selectedCol == c;
@@ -52,6 +52,7 @@
 @code {
     [Parameter] public string Fen { get; set; } = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     [Parameter] public EventCallback<string> OnMoveMade { get; set; }
+    [Parameter] public bool isFlipped { get; set; } = false;
 
     private char[,] boardGrid = new char[8, 8];
     private int? selectedRow = null;

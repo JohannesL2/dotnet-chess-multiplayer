@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "chessapp.client",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-0MWFXnm4TBfwhGGSNqJ7PJBWso1vtoTTaM/lQgXevH4=",
+    "hash": "sha256-/yYWilyxc9H8j65mmFbdRxOgbbALe5uACgjfiFnOC1c=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.b6l13xorvf.js"
@@ -1296,16 +1296,16 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "chessapp.client.wasm",
-        "name": "chessapp.client.3jmfnrmn4v.wasm",
-        "hash": "sha256-Mf10LKXRpai5BIljStkajgh1OWoXn5s+uUygdidEgoU=",
+        "name": "chessapp.client.m92zhqowxg.wasm",
+        "hash": "sha256-Os9TJzqgB1k47+qTcQ4Bqo/qJHO4qsA0J7zdkHfLRFo=",
         "cache": "force-cache"
       }
     ],
     "pdb": [
       {
         "virtualPath": "chessapp.client.pdb",
-        "name": "chessapp.client.fpq1e7ihm8.pdb",
-        "hash": "sha256-c+ep/Ci9mZoL+lpmuOGtQ3sUov+jbdWBnkm1iX5tu/4=",
+        "name": "chessapp.client.06fn87rc3e.pdb",
+        "hash": "sha256-iOBUuCSgdDUhLht+is6vFus5aYotn4fOZ43UKJaX2fk=",
         "cache": "force-cache"
       }
     ],

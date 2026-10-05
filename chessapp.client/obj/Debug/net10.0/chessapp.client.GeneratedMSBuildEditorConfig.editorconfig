@@ -33,8 +33,8 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/Pages/ChessBoard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hlc3NCb2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/Pages/Game.razor]
@@ -47,10 +47,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTm90Rm91bmQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/_Imports.razor]
