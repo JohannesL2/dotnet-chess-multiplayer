@@ -1,0 +1,135 @@
+<div class="chess-board">
+    @for (int row = 0; row < 8; row++)
+    {
+        @for (int col = 0; col < 8; col++)
+        {
+            int r = row;
+            int c = col;
+            bool isDark = (r + c) % 2 != 0;
+            char piece = boardGrid[r, c];
+            bool isSelected = selectedRow == r && selectedCol == c;
+
+            <div class="square @(isDark ? "dark" : "light") @(isSelected ? "selected" : "")"
+                 @onclick="() => HandleSquareClick(r, c)">
+                @if (piece != ' ')
+                {
+                    <span class="piece">@GetPieceSymbol(piece)</span>
+                }
+            </div>
+        }
+    }
+</div>
+
+<style>
+    .chess-board {
+        display: grid;
+        grid-template-columns: repeat(8, 60px);
+        grid-template-rows: repeat(8, 60px);
+        border: 3px solid #333;
+        width: 480px;
+        height: 480px;
+        user-select: none;
+        margin: 20px 0;
+    }
+
+    .square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        cursor: pointer;
+    }
+
+    .light { background-color: #f0d9b5; }
+    .dark { background-color: #b58863; }
+    .selected { background-color: #7b61ff !important; }
+
+    .piece {
+        line-height: 1;
+    }
+</style>
+
+@code {
+    [Parameter] public string Fen { get; set; } = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    [Parameter] public EventCallback<string> OnMoveMade { get; set; }
+
+    private char[,] boardGrid = new char[8, 8];
+    private int? selectedRow = null;
+    private int? selectedCol = null;
+
+    protected override void OnParametersSet()
+    {   
+    ParseFen(Fen);
+    selectedRow = null;
+    selectedCol = null;
+    }
+
+    private void ParseFen(string fen)
+    {
+        boardGrid = new char[8, 8];
+        string boardPart = fen.Split(' ')[0];
+        string[] rows = boardPart.Split('/');
+
+        for (int r = 0; r < 8; r++)
+        {
+            int c = 0;
+            foreach (char ch in rows[r])
+            {
+                if (char.IsDigit(ch))
+                {
+                    int emptySquares = ch - '0';
+                    for (int i = 0; i < emptySquares; i++)
+                    {
+                        boardGrid[r, c++] = ' ';
+                    }
+                }
+                else
+                {
+                    boardGrid[r, c++] = ch;
+                }
+            }
+        }
+    }
+
+    private async Task HandleSquareClick(int row, int col)
+    {
+        if (selectedRow == null && selectedCol == null)
+        {
+            if (boardGrid[row, col] != ' ')
+            {
+                selectedRow = row;
+                selectedCol = col;
+            }
+        }
+        else
+        {
+            if (selectedRow == row && selectedCol == col)
+            {
+                selectedRow = null;
+                selectedCol = null;
+                return;
+            }
+            string from = ConvertToNotation(selectedRow.Value, selectedCol.Value);
+            string to = ConvertToNotation(row, col);
+
+            selectedRow = null;
+            selectedCol = null;
+
+            await OnMoveMade.InvokeAsync($"{from}-{to}");
+        }
+    }
+
+    private string ConvertToNotation(int row, int col)
+    {
+    char file = (char)('A' + col); 
+    int rank = 8 - row;
+    return $"{file}{rank}";
+    }
+
+    private string GetPieceSymbol(char piece) => piece switch
+    {
+        'K' => "♔", 'Q' => "♕", 'R' => "♖", 'B' => "♗", 'N' => "♘", 'P' => "♙",
+        'k' => "♚", 'q' => "♛", 'r' => "♜", 'b' => "♝", 'n' => "♞", 'p' => "♟",
+        _ => ""
+    };
+}

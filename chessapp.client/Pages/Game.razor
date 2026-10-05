@@ -1,16 +1,22 @@
 @page "/game"
 @using Microsoft.AspNetCore.SignalR.Client
+@using ChessDotNet
 @inject NavigationManager Navigation
 @implements IAsyncDisposable
 
-<h3>Multiplayer Schack</h3>
+<h3>Multiplayer Chess</h3>
 
 @if (hubConnection?.State == HubConnectionState.Connected)
 {
     <p style="color: green;">Connected to the server!</p>
-    <p>Aktuell FEN (Brädesläge): <code>@currentFen</code></p>
+    
+    <ChessBoard Fen="@currentFen" OnMoveMade="HandleMoveMade" />
 
-    <button @onclick="TestMove">Send test move</button>
+    <p>Latest move/notation: <code>@lastMove</code></p>
+    @if (!string.IsNullOrEmpty(errorMessage))
+{
+    <p style="color: red; font-weight: bold;">@errorMessage</p>
+}
 }
 else
 {
@@ -19,38 +25,67 @@ else
 
 @code {
     private HubConnection? hubConnection;
-    private string currentFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; // Start position
-
+    private ChessGame chessGame = new ChessGame();
+    private string errorMessage = string.Empty;
+    private string currentFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    private string lastMove = "";
+    
     protected override async Task OnInitializedAsync()
+{
+    chessGame = new ChessGame();
+    currentFen = chessGame.GetFen();
+
+    hubConnection = new HubConnectionBuilder()
+        .WithUrl("http://localhost:5180/chessHub")
+        .WithAutomaticReconnect()
+        .Build();
+
+    hubConnection.On<string>("ReceiveMove", (newFen) =>
     {
-        // Server port
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl("http://localhost:5180/chessHub")
-            .WithAutomaticReconnect()
-            .Build();
-
-        // Listen for incoming moves from the server
-        hubConnection.On<string>("ReceiveMove", (newFen) =>
-        {
-            currentFen = newFen;
-            StateHasChanged(); // Update the UI with the new FEN
-        });
-
-        await hubConnection.StartAsync();
+        currentFen = newFen;
         
-        // Connect to a specific game room (for example, "room-123")
-        await hubConnection.SendAsync("JoinGame", "room-123");
-    }
+        chessGame = new ChessGame(newFen);
+        errorMessage = "";
+        
+        StateHasChanged();
+    });
 
-    private async Task TestMove()
+    await hubConnection.StartAsync();
+    await hubConnection.SendAsync("JoinGame", "room-123");
+}
+
+private async Task HandleMoveMade(string moveNotation)
+{
+    lastMove = moveNotation;
+
+    var parts = moveNotation.Split('-');
+    if (parts.Length != 2) return;
+
+    try
     {
-        if (hubConnection is not null)
+        var move = new Move(parts[0].ToUpper(), parts[1].ToUpper(), chessGame.WhoseTurn);
+
+        if (chessGame.IsValidMove(move))
         {
-            // Test fake move: e4 (pawn to e4)
-            string testFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"; // 1. e4
-            await hubConnection.SendAsync("SendMove", "room-123", testFen);
+            chessGame.MakeMove(move, true);
+            currentFen = chessGame.GetFen();
+            errorMessage = "";
+
+            if (hubConnection is not null)
+            {
+                await hubConnection.SendAsync("SendMove", "room-123", currentFen);
+            }
+        }
+        else
+        {
+            errorMessage = "Invalid move!";
         }
     }
+    catch (Exception ex)
+    {
+        errorMessage = $"Error processing move: {ex.Message}";
+    }
+}
 
     public async ValueTask DisposeAsync()
     {
