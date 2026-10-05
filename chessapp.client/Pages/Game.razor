@@ -1,0 +1,62 @@
+@page "/game"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager Navigation
+@implements IAsyncDisposable
+
+<h3>Multiplayer Schack</h3>
+
+@if (hubConnection?.State == HubConnectionState.Connected)
+{
+    <p style="color: green;">Connected to the server!</p>
+    <p>Aktuell FEN (Brädesläge): <code>@currentFen</code></p>
+
+    <button @onclick="TestMove">Send test move</button>
+}
+else
+{
+    <p>Connecting to the chess server...</p>
+}
+
+@code {
+    private HubConnection? hubConnection;
+    private string currentFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; // Start position
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Server port
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:5180/chessHub")
+            .WithAutomaticReconnect()
+            .Build();
+
+        // Listen for incoming moves from the server
+        hubConnection.On<string>("ReceiveMove", (newFen) =>
+        {
+            currentFen = newFen;
+            StateHasChanged(); // Update the UI with the new FEN
+        });
+
+        await hubConnection.StartAsync();
+        
+        // Connect to a specific game room (for example, "room-123")
+        await hubConnection.SendAsync("JoinGame", "room-123");
+    }
+
+    private async Task TestMove()
+    {
+        if (hubConnection is not null)
+        {
+            // Test fake move: e4 (pawn to e4)
+            string testFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1"; // 1. e4
+            await hubConnection.SendAsync("SendMove", "room-123", testFen);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}

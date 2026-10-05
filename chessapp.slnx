@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="chessapp.client/chessapp.client.csproj" />
+  <Project Path="chessapp.server/chessapp.server.csproj" />
+</Solution>
