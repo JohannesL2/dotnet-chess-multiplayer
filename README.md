@@ -2,6 +2,8 @@
 
 A full-stack, real-time multiplayer chess application built with **Blazor**, **ASP.NET Core SignalR**, and **ChessDotNet**.
 
+<img width="492" alt="screenshot" src="https://github.com/user-attachments/assets/ec8372e3-60b4-4c5c-a616-6735d53e2bd8" />
+
 This repository contains a decoupled solution architecture featuring a dedicated backend Web API/SignalR Hub and a WebAssembly/Blazor client frontend.
 
 ## Architecture & Flow
