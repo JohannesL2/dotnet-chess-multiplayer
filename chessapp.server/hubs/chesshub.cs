@@ -1,5 +1,5 @@
 using ChessApp.Server.Services;
-using ChessApp.Shared.Contracts;
+using ChessApp.Contracts;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChessApp.Server.Hubs;

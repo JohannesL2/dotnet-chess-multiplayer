@@ -1,4 +1,4 @@
-using ChessApp.Shared.Contracts;
+using ChessApp.Contracts;
 
 namespace ChessApp.Server.Services;
 

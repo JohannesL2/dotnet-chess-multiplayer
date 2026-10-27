@@ -1,5 +1,5 @@
 using System.Collections.Concurrent;
-using ChessApp.Shared.Contracts;
+using ChessApp.Contracts;
 using ChessDotNet;
 
 namespace ChessApp.Server.Services;
