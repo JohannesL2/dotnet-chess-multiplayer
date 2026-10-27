@@ -14,10 +14,10 @@
           "lib/netstandard1.3/ChessDotNet.dll": {}
         }
       },
-      "Microsoft.AspNetCore.OpenApi/10.0.12": {
+      "Microsoft.AspNetCore.OpenApi/10.0.14": {
         "type": "package",
         "dependencies": {
-          "Microsoft.OpenApi": "[2.12.0, 3.0.0)"
+          "Microsoft.OpenApi": "[2.12.2, 3.0.0)"
         },
         "compile": {
           "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll": {
@@ -45,7 +45,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.OpenApi/2.12.0": {
+      "Microsoft.OpenApi/2.12.2": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.OpenApi.dll": {
@@ -89,10 +89,10 @@
         "lib/netstandard1.3/ChessDotNet.dll"
       ]
     },
-    "Microsoft.AspNetCore.OpenApi/10.0.12": {
-      "sha512": "7RnQ/UKn+kK3JDLmTpW+vVqNErWthGPAVAy1aIiBzv4ucQ6g9NFvOJUuT0PHcpvcJxGVxctMxj6t+NESWMrgHQ==",
+    "Microsoft.AspNetCore.OpenApi/10.0.14": {
+      "sha512": "3M6yO4nv8fmvM/1X7DqQcMxw/ptNLBcUzZt19SBEyfZF32gqZuwoPNnYd1xlDnFvQOGOkZDncf7p9E24blcTkQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.openapi/10.0.12",
+      "path": "microsoft.aspnetcore.openapi/10.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -103,7 +103,7 @@
         "build/Microsoft.AspNetCore.OpenApi.targets",
         "lib/net10.0/Microsoft.AspNetCore.OpenApi.dll",
         "lib/net10.0/Microsoft.AspNetCore.OpenApi.xml",
-        "microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+        "microsoft.aspnetcore.openapi.10.0.14.nupkg.sha512",
         "microsoft.aspnetcore.openapi.nuspec"
       ]
     },
@@ -122,10 +122,10 @@
         "runtime.json"
       ]
     },
-    "Microsoft.OpenApi/2.12.0": {
-      "sha512": "0xB/be+f6qYOhvQPUrVsLrau+fkowYv6gt9RIkajMhwT7sZnqtcA797yW3bS5kgSje+AQW4xZgyLnW641YFioQ==",
+    "Microsoft.OpenApi/2.12.2": {
+      "sha512": "ZkT7qiJe0Kj0+DTZOZo+xrDy1kNmdsWFQVPIQLNx9ZJ0T9cB2LG7r+Bi60so8/+yg1nkS7QCPadrzsTG4VPKrA==",
       "type": "package",
-      "path": "microsoft.openapi/2.12.0",
+      "path": "microsoft.openapi/2.12.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -136,7 +136,7 @@
         "lib/netstandard2.0/Microsoft.OpenApi.dll",
         "lib/netstandard2.0/Microsoft.OpenApi.pdb",
         "lib/netstandard2.0/Microsoft.OpenApi.xml",
-        "microsoft.openapi.2.12.0.nupkg.sha512",
+        "microsoft.openapi.2.12.2.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
     },
@@ -162,7 +162,7 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "ChessDotNet >= 1.0.0",
-      "Microsoft.AspNetCore.OpenApi >= 10.0.12",
+      "Microsoft.AspNetCore.OpenApi >= 10.0.14",
       "chessapp.shared >= 1.0.0"
     ]
   },
@@ -225,16 +225,16 @@
           },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.14, )",
             "versionCentrallyManaged": true
           }
         },
         "centralPackageVersions": {
           "ChessDotNet": "1.0.0",
-          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.12",
-          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.12",
-          "Microsoft.AspNetCore.OpenApi": "10.0.12",
-          "Microsoft.AspNetCore.SignalR.Client": "10.0.12"
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
+          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+          "Microsoft.AspNetCore.OpenApi": "10.0.14",
+          "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
         },
         "imports": [
           "net461",

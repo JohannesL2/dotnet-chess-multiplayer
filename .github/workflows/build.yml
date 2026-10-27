@@ -15,8 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-dotnet@v5
-        with:
-          global-json-file: global.json
       - run: dotnet restore chessapp.slnx
       - run: dotnet format chessapp.slnx whitespace --verify-no-changes --no-restore
       - run: dotnet build chessapp.slnx --configuration Release --no-restore

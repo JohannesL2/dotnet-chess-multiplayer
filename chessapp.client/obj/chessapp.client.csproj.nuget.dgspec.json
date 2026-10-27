@@ -66,18 +66,18 @@
             },
             "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "versionCentrallyManaged": true
             },
             "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "versionCentrallyManaged": true
             },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "versionCentrallyManaged": true
             },
             "Microsoft.NET.ILLink.Tasks": {
@@ -95,10 +95,10 @@
           },
           "centralPackageVersions": {
             "ChessDotNet": "1.0.0",
-            "Microsoft.AspNetCore.Components.WebAssembly": "10.0.12",
-            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.12",
-            "Microsoft.AspNetCore.OpenApi": "10.0.12",
-            "Microsoft.AspNetCore.SignalR.Client": "10.0.12"
+            "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+            "Microsoft.AspNetCore.OpenApi": "10.0.14",
+            "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
           },
           "imports": [
             "net461",
@@ -451,10 +451,10 @@
           "targetAlias": "net10.0",
           "centralPackageVersions": {
             "ChessDotNet": "1.0.0",
-            "Microsoft.AspNetCore.Components.WebAssembly": "10.0.12",
-            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.12",
-            "Microsoft.AspNetCore.OpenApi": "10.0.12",
-            "Microsoft.AspNetCore.SignalR.Client": "10.0.12"
+            "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+            "Microsoft.AspNetCore.OpenApi": "10.0.14",
+            "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
           },
           "imports": [
             "net461",
