@@ -104,13 +104,18 @@
         }
         else
         {
+            if (selectedRow is not int fromRow || selectedCol is not int fromCol)
+            {
+                return;
+            }
+
             if (selectedRow == row && selectedCol == col)
             {
                 selectedRow = null;
                 selectedCol = null;
                 return;
             }
-            string from = ConvertToNotation(selectedRow.Value, selectedCol.Value);
+            string from = ConvertToNotation(fromRow, fromCol);
             string to = ConvertToNotation(row, col);
 
             selectedRow = null;

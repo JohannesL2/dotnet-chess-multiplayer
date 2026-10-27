@@ -85,7 +85,7 @@ public sealed class InMemoryGameRoomManager : IGameRoomManager
                 return new(false, Error: "It is not your turn.");
             }
 
-            if (!IsValidCoordinate(move?.From) || !IsValidCoordinate(move.To))
+            if (move is null || !IsValidCoordinate(move.From) || !IsValidCoordinate(move.To))
             {
                 return new(false, Error: "Move coordinates must use chess notation, for example E2 and E4.");
             }
