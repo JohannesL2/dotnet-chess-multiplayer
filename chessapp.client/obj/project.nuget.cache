@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hX59ckxoOnU=",
-  "success": true,
-  "projectFilePath": "/Users/johanneslindgren/Desktop/ws/chessapp/ChessApp.Client/chessapp.client.csproj",
+  "dgSpecHash": "xiL81BPVU9I=",
+  "success": false,
+  "projectFilePath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
   "expectedPackageFiles": [
     "/Users/johanneslindgren/.nuget/packages/chessdotnet/1.0.0/chessdotnet.1.0.0.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.12/microsoft.aspnetcore.app.internal.assets.10.0.12.nupkg.sha512",
@@ -48,5 +48,18 @@
     "/Users/johanneslindgren/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/10.0.12/microsoft.netcore.app.runtime.mono.browser-wasm.10.0.12.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Error",
+      "message": "Warning As Error: Package 'Microsoft.AspNetCore.SignalR.Common' 10.0.12 has a known high severity vulnerability, https://github.com/advisories/GHSA-334f-vvp4-7g6p",
+      "projectPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
+      "filePath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
+      "libraryId": "Microsoft.AspNetCore.SignalR.Common",
+      "targetGraphs": [
+        "net10.0",
+        "net10.0/browser-wasm"
+      ]
+    }
+  ]
 }

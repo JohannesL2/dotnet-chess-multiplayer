@@ -1,52 +1,70 @@
-# ♟️ Chess Multiplayer (.NET Frontend & Backend)
+# Chess Multiplayer
 
-A full-stack, real-time multiplayer chess application built with **Blazor**, **ASP.NET Core SignalR**, and **ChessDotNet**.
+[![Build](https://github.com/JohannesL2/dotnet-chess-multiplayer/actions/workflows/build.yml/badge.svg)](https://github.com/JohannesL2/dotnet-chess-multiplayer/actions/workflows/build.yml)
 
-<img width="492" alt="screenshot" src="https://github.com/user-attachments/assets/ec8372e3-60b4-4c5c-a616-6735d53e2bd8" />
+A real-time, two-player chess app built with Blazor WebAssembly, ASP.NET Core SignalR, and ChessDotNet. Create a private room, share its code, and play directly in the browser.
 
-This repository contains a decoupled solution architecture featuring a dedicated backend Web API/SignalR Hub and a WebAssembly/Blazor client frontend.
+<img width="492" alt="Chess Multiplayer game board" src="https://github.com/user-attachments/assets/ec8372e3-60b4-4c5c-a616-6735d53e2bd8" />
 
-## Architecture & Flow
-<img width="492" height="242" alt="flow" src="https://github.com/user-attachments/assets/e61aba3e-994e-4538-93ac-d1d733cdc6de" />
+## Highlights
 
----
+- Real-time play over SignalR with automatic reconnection.
+- Server-authoritative move validation and turn enforcement.
+- Private, six-character room codes for two players.
+- Responsive board that flips for the black player.
+- Health endpoint and OpenAPI document in development.
 
-## Features
-
-- **Real-Time Synchronization:** Seamless, zero-latency move updates between players powered by ASP.NET Core SignalR WebSockets.
-- **Matchmaking & Room System:** Create private rooms with randomly generated codes or join active games instantly.
-- **Move & Rule Enforcement:** Built-in chess engine logic via `ChessDotNet` validating legal moves, turn ordering, and board states.
-- **Responsive UI:** Clean visual design with dynamic board flipping (perspective changes depending on assigned piece color: White/Black) and real-time status indicators.
-- **Session Resilience:** Graceful handling of player disconnections, state cleanups, and game resetting.
-
----
-
-## Tech Stack
-
-- **Frontend:** Blazor (C# / HTML5 / CSS3)
-- **Backend:** ASP.NET Core SignalR Hub, Web API
-- **Domain Logic:** `ChessDotNet`
-- **Communication:** SignalR (WebSockets / Long Polling fallback)
-
----
-
-## Project Structure
+## Architecture
 
 ```text
-├── ChessApp.Server/    # ASP.NET Core SignalR Hub & backend logic
-└── ChessApp.Client/    # Blazor frontend component UI
+Browser (Blazor WebAssembly)
+        │ MoveRequest
+        ▼
+ASP.NET Core / SignalR Hub ──► InMemoryGameRoomManager ──► ChessDotNet
+        │                                                    │
+        └──────────── validated FEN to both players ◄────────┘
 ```
 
----
+The solution separates transport, game-room orchestration, and shared contracts:
 
-## How to use
+```text
+chessapp.client/   Blazor WebAssembly UI and SignalR client
+chessapp.server/   ASP.NET Core host, SignalR hub, and server-side game state
+chessapp.shared/   Contracts shared safely between client and server
+```
 
-Start server
+The server owns each game's state. Clients submit coordinates such as `E2` → `E4`; they never submit a board position to be trusted by the server.
+
+## Run locally
+
+Prerequisite: [.NET 10 SDK](https://dotnet.microsoft.com/download).
+
 ```bash
-dotnet run --project ChessApp.Server
+dotnet restore
+dotnet run --project chessapp.server
+dotnet run --project chessapp.client
 ```
-Start client
+
+Open the client URL displayed in the terminal (normally `http://localhost:5124`) in two separate browser sessions. Create a room in one and join it from the other using the room code.
+
+During development, the server also exposes:
+
+- `GET /health` — basic health check
+- `/openapi/v1.json` — OpenAPI document
+
+## Quality gates
+
 ```bash
-dotnet run --project ChessApp.Client
+dotnet format --verify-no-changes
+dotnet build chessapp.slnx --configuration Release
 ```
-Open two separate browser tabs (or incognito windows) at http://localhost:5124 to create a room, copy the room code, and test the real-time chess multiplayer.
+
+GitHub Actions runs these checks for pushes and pull requests to `main`. Package versions are managed centrally in `Directory.Packages.props`, while shared build rules live in `Directory.Build.props`.
+
+## VS Code and Codespaces
+
+Open the repository folder in VS Code and accept the recommended extensions. The workspace supplies format-on-save, build/test tasks, a server debugger, and a **run app** task that starts both projects. The included dev container provides the pinned .NET 10 development environment for Codespaces or the VS Code Dev Containers extension.
+
+## Scaling note
+
+`InMemoryGameRoomManager` is intentionally scoped to one server instance. For multi-instance deployment, replace it with a durable/distributed room store and configure a SignalR backplane.

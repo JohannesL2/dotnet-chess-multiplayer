@@ -2,6 +2,18 @@
   "version": 4,
   "targets": {
     "net10.0": {
+      "ChessDotNet/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/ChessDotNet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/ChessDotNet.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/10.0.12": {
         "type": "package",
         "dependencies": {
@@ -24,6 +36,15 @@
           "build/Microsoft.AspNetCore.OpenApi.targets": {}
         }
       },
+      "Microsoft.NETCore.Platforms/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/_._": {}
+        }
+      },
       "Microsoft.OpenApi/2.12.0": {
         "type": "package",
         "compile": {
@@ -36,10 +57,38 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "NETStandard.Library/1.6.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "chessapp.shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/chessapp.shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/chessapp.shared.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "ChessDotNet/1.0.0": {
+      "sha512": "BLb2fHVqyxy4vKvzBVxlU29TMjiApFCq9jWoAufV33PVM1/+iZRozYpNjHU3ZRJxCyXa2qgDqf/VGmb8eVeB4w==",
+      "type": "package",
+      "path": "chessdotnet/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "chessdotnet.1.0.0.nupkg.sha512",
+        "chessdotnet.nuspec",
+        "lib/netstandard1.3/ChessDotNet.dll"
+      ]
+    },
     "Microsoft.AspNetCore.OpenApi/10.0.12": {
       "sha512": "7RnQ/UKn+kK3JDLmTpW+vVqNErWthGPAVAy1aIiBzv4ucQ6g9NFvOJUuT0PHcpvcJxGVxctMxj6t+NESWMrgHQ==",
       "type": "package",
@@ -56,6 +105,21 @@
         "lib/net10.0/Microsoft.AspNetCore.OpenApi.xml",
         "microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
         "microsoft.aspnetcore.openapi.nuspec"
+      ]
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "type": "package",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/netstandard1.0/_._",
+        "microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+        "microsoft.netcore.platforms.nuspec",
+        "runtime.json"
       ]
     },
     "Microsoft.OpenApi/2.12.0": {
@@ -75,11 +139,31 @@
         "microsoft.openapi.2.12.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "NETStandard.Library/1.6.1": {
+      "sha512": "WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A==",
+      "type": "package",
+      "path": "netstandard.library/1.6.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "netstandard.library.1.6.1.nupkg.sha512",
+        "netstandard.library.nuspec"
+      ]
+    },
+    "chessapp.shared/1.0.0": {
+      "type": "project",
+      "path": "../chessapp.shared/chessapp.shared.csproj",
+      "msbuildProject": "../chessapp.shared/chessapp.shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Microsoft.AspNetCore.OpenApi >= 10.0.12"
+      "ChessDotNet >= 1.0.0",
+      "Microsoft.AspNetCore.OpenApi >= 10.0.12",
+      "chessapp.shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -88,12 +172,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.server/chessapp.server.csproj",
-      "projectName": "chessapp.server",
-      "projectPath": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.server/chessapp.server.csproj",
+      "projectUniqueName": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.server/chessapp.server.csproj",
+      "projectName": "ChessApp.Server",
+      "projectPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.server/chessapp.server.csproj",
       "packagesPath": "/Users/johanneslindgren/.nuget/packages/",
-      "outputPath": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.server/obj/",
+      "outputPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.server/obj/",
       "projectStyle": "PackageReference",
+      "centralPackageVersionsManagementEnabled": true,
+      "CentralPackageTransitivePinningEnabled": true,
       "configFilePaths": [
         "/Users/johanneslindgren/.nuget/NuGet/NuGet.Config"
       ],
@@ -107,10 +193,15 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.shared/chessapp.shared.csproj": {
+              "projectPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.shared/chessapp.shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
+        "allWarningsAsErrors": true,
         "warnAsError": [
           "NU1605"
         ]
@@ -127,10 +218,23 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "ChessDotNet": {
+            "target": "Package",
+            "version": "[1.0.0, )",
+            "versionCentrallyManaged": true
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
-            "version": "[10.0.12, )"
+            "version": "[10.0.12, )",
+            "versionCentrallyManaged": true
           }
+        },
+        "centralPackageVersions": {
+          "ChessDotNet": "1.0.0",
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.12",
+          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.12",
+          "Microsoft.AspNetCore.OpenApi": "10.0.12",
+          "Microsoft.AspNetCore.SignalR.Client": "10.0.12"
         },
         "imports": [
           "net461",

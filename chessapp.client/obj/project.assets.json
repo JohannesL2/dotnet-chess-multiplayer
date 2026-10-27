@@ -685,6 +685,16 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
+      },
+      "chessapp.shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/chessapp.shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/chessapp.shared.dll": {}
+        }
       }
     },
     "net10.0/browser-wasm": {
@@ -1370,6 +1380,16 @@
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "chessapp.shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/chessapp.shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/chessapp.shared.dll": {}
         }
       }
     }
@@ -2592,6 +2612,11 @@
         "netstandard.library.1.6.1.nupkg.sha512",
         "netstandard.library.nuspec"
       ]
+    },
+    "chessapp.shared/1.0.0": {
+      "type": "project",
+      "path": "../chessapp.shared/chessapp.shared.csproj",
+      "msbuildProject": "../chessapp.shared/chessapp.shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2600,9 +2625,10 @@
       "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.12",
       "Microsoft.AspNetCore.Components.WebAssembly >= 10.0.12",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 10.0.12",
+      "Microsoft.AspNetCore.SignalR.Client >= 10.0.12",
       "Microsoft.NET.ILLink.Tasks >= 10.0.12",
       "Microsoft.NET.Sdk.WebAssembly.Pack >= 10.0.12",
-      "microsoft.aspnetcore.signalr.client >= 10.0.12"
+      "chessapp.shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2611,12 +2637,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/chessapp.client.csproj",
-      "projectName": "chessapp.client",
-      "projectPath": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/chessapp.client.csproj",
+      "projectUniqueName": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
+      "projectName": "ChessApp.Client",
+      "projectPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
       "packagesPath": "/Users/johanneslindgren/.nuget/packages/",
-      "outputPath": "/Users/johanneslindgren/Desktop/ws/chessapp/chessapp.client/obj/",
+      "outputPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/obj/",
       "projectStyle": "PackageReference",
+      "centralPackageVersionsManagementEnabled": true,
+      "CentralPackageTransitivePinningEnabled": true,
       "configFilePaths": [
         "/Users/johanneslindgren/.nuget/NuGet/NuGet.Config"
       ],
@@ -2630,10 +2658,15 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.shared/chessapp.shared.csproj": {
+              "projectPath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.shared/chessapp.shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
+        "allWarningsAsErrors": true,
         "warnAsError": [
           "NU1605"
         ]
@@ -2652,7 +2685,8 @@
         "dependencies": {
           "ChessDotNet": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.0, )",
+            "versionCentrallyManaged": true
           },
           "Microsoft.AspNetCore.App.Internal.Assets": {
             "suppressParent": "All",
@@ -2662,12 +2696,19 @@
           },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",
-            "version": "[10.0.12, )"
+            "version": "[10.0.12, )",
+            "versionCentrallyManaged": true
           },
           "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )"
+            "version": "[10.0.12, )",
+            "versionCentrallyManaged": true
+          },
+          "Microsoft.AspNetCore.SignalR.Client": {
+            "target": "Package",
+            "version": "[10.0.12, )",
+            "versionCentrallyManaged": true
           },
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
@@ -2680,11 +2721,14 @@
             "target": "Package",
             "version": "[10.0.12, )",
             "autoReferenced": true
-          },
-          "microsoft.aspnetcore.signalr.client": {
-            "target": "Package",
-            "version": "[10.0.12, )"
           }
+        },
+        "centralPackageVersions": {
+          "ChessDotNet": "1.0.0",
+          "Microsoft.AspNetCore.Components.WebAssembly": "10.0.12",
+          "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.12",
+          "Microsoft.AspNetCore.OpenApi": "10.0.12",
+          "Microsoft.AspNetCore.SignalR.Client": "10.0.12"
         },
         "imports": [
           "net461",
@@ -2990,5 +3034,17 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Error",
+      "message": "Warning As Error: Package 'Microsoft.AspNetCore.SignalR.Common' 10.0.12 has a known high severity vulnerability, https://github.com/advisories/GHSA-334f-vvp4-7g6p",
+      "libraryId": "Microsoft.AspNetCore.SignalR.Common",
+      "targetGraphs": [
+        "net10.0",
+        "net10.0/browser-wasm"
+      ]
+    }
+  ]
 }

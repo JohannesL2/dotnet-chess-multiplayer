@@ -1,7 +1,9 @@
 @page "/game"
 @using Microsoft.AspNetCore.SignalR.Client
 @using ChessDotNet
+@using ChessApp.Shared.Contracts
 @inject NavigationManager Navigation
+@inject IConfiguration Configuration
 @implements IAsyncDisposable
 
 <h3>Multiplayer Chess</h3>
@@ -88,7 +90,7 @@ else
         ResetGameState();
 
         hubConnection = new HubConnectionBuilder()
-            .WithUrl("http://localhost:5180/chessHub")
+            .WithUrl(Configuration["Chess:HubUrl"] ?? "http://localhost:5180/chessHub")
             .WithAutomaticReconnect()
             .Build();
 
@@ -203,13 +205,11 @@ else
 
             if (chessGame.IsValidMove(move))
             {
-                chessGame.MakeMove(move, true);
-                currentFen = chessGame.GetFen();
                 errorMessage = "";
 
                 if (hubConnection is not null)
                 {
-                    await hubConnection.SendAsync("SendMove", currentRoomCode, currentFen);
+                    await hubConnection.SendAsync("SendMove", currentRoomCode, new MoveRequest(parts[0], parts[1]));
                 }
             }
             else
