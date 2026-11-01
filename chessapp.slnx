@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="chessapp.client/chessapp.client.csproj" />
+  <Project Path="chessapp.maui/chessapp.maui.csproj" />
   <Project Path="chessapp.server/chessapp.server.csproj" />
   <Project Path="chessapp.shared/chessapp.shared.csproj" />
 </Solution>

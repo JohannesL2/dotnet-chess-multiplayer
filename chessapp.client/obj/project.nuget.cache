@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "5OZ4CC2z6eY=",
+  "dgSpecHash": "Qz/6AzwkQHs=",
   "success": true,
   "projectFilePath": "/Users/johanneslindgren/Desktop/ws/dotnet-chess-multiplayer/chessapp.client/chessapp.client.csproj",
   "expectedPackageFiles": [
     "/Users/johanneslindgren/.nuget/packages/chessdotnet/1.0.0/chessdotnet.1.0.0.nupkg.sha512",
-    "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.12/microsoft.aspnetcore.app.internal.assets.10.0.12.nupkg.sha512",
+    "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.14/microsoft.aspnetcore.app.internal.assets.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.authorization/10.0.14/microsoft.aspnetcore.authorization.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.components/10.0.14/microsoft.aspnetcore.components.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.components.analyzers/10.0.14/microsoft.aspnetcore.components.analyzers.10.0.14.nupkg.sha512",
@@ -42,11 +42,11 @@
     "/Users/johanneslindgren/.nuget/packages/microsoft.extensions.validation/10.0.14/microsoft.extensions.validation.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.jsinterop/10.0.14/microsoft.jsinterop.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.jsinterop.webassembly/10.0.14/microsoft.jsinterop.webassembly.10.0.14.nupkg.sha512",
-    "/Users/johanneslindgren/.nuget/packages/microsoft.net.illink.tasks/10.0.12/microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
-    "/Users/johanneslindgren/.nuget/packages/microsoft.net.sdk.webassembly.pack/10.0.12/microsoft.net.sdk.webassembly.pack.10.0.12.nupkg.sha512",
+    "/Users/johanneslindgren/.nuget/packages/microsoft.net.illink.tasks/10.0.14/microsoft.net.illink.tasks.10.0.14.nupkg.sha512",
+    "/Users/johanneslindgren/.nuget/packages/microsoft.net.sdk.webassembly.pack/10.0.14/microsoft.net.sdk.webassembly.pack.10.0.14.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/johanneslindgren/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
-    "/Users/johanneslindgren/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/10.0.12/microsoft.netcore.app.runtime.mono.browser-wasm.10.0.12.nupkg.sha512"
+    "/Users/johanneslindgren/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/10.0.14/microsoft.netcore.app.runtime.mono.browser-wasm.10.0.14.nupkg.sha512"
   ],
   "logs": []
 }

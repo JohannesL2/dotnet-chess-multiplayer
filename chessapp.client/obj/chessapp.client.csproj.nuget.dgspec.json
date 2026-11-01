@@ -22,6 +22,7 @@
           "net10.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +62,7 @@
             "Microsoft.AspNetCore.App.Internal.Assets": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "autoReferenced": true
             },
             "Microsoft.AspNetCore.Components.WebAssembly": {
@@ -83,13 +84,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.14, )",
               "autoReferenced": true
             }
           },
@@ -97,8 +98,11 @@
             "ChessDotNet": "1.0.0",
             "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
             "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+            "Microsoft.AspNetCore.Components.WebView.Maui": "10.0.40",
             "Microsoft.AspNetCore.OpenApi": "10.0.14",
-            "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
+            "Microsoft.AspNetCore.SignalR.Client": "10.0.14",
+            "Microsoft.Extensions.Logging.Debug": "10.0.0",
+            "Microsoft.Maui.Controls": "(, )"
           },
           "imports": [
             "net461",
@@ -114,7 +118,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[10.0.12, 10.0.12]"
+              "version": "[10.0.14, 10.0.14]"
             }
           ],
           "frameworkReferences": {
@@ -122,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.403/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -423,6 +427,7 @@
           "net10.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -453,8 +458,11 @@
             "ChessDotNet": "1.0.0",
             "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
             "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+            "Microsoft.AspNetCore.Components.WebView.Maui": "10.0.40",
             "Microsoft.AspNetCore.OpenApi": "10.0.14",
-            "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
+            "Microsoft.AspNetCore.SignalR.Client": "10.0.14",
+            "Microsoft.Extensions.Logging.Debug": "10.0.0",
+            "Microsoft.Maui.Controls": "(, )"
           },
           "imports": [
             "net461",
@@ -472,7 +480,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.403/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -747,6 +755,11 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
+        }
+      },
+      "runtimes": {
+        "android-arm64": {
+          "#import": []
         }
       }
     }

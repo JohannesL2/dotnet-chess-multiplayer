@@ -1,0 +1,274 @@
+@implements IAsyncDisposable
+
+<div class="lobby">
+    <h3>♟️ Chess Multiplayer</h3>
+
+    <div class="panel">
+        <label>Server</label>
+        <input @bind="hubUrlInput" placeholder="http://localhost:5180/chessHub" />
+        <button @onclick="ConnectAsync" disabled="@isConnecting">
+            @(IsConnected ? "Reconnect" : "Connect to server")
+        </button>
+        <p class="status">@connectionStatus</p>
+    </div>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <p class="error">@errorMessage</p>
+    }
+
+    @if (IsConnected && !hasJoinedRoom)
+    {
+        <div class="panel">
+            <button @onclick="CreateRoom">Create new room</button>
+            <input @bind="inputRoomId" placeholder="Room code" />
+            <button @onclick="JoinRoom">Connect to room</button>
+        </div>
+    }
+
+    @if (hasJoinedRoom)
+    {
+        <div class="panel">
+            <p>Room: <strong>@currentRoomCode</strong></p>
+            <p>You're playing as: <strong>@myColor</strong></p>
+            <p>@statusMessage</p>
+        </div>
+
+        <ChessBoard Fen="@currentFen"
+                    OnMoveMade="HandleMoveMade"
+                    isFlipped="@(myColor == "Black")" />
+    }
+</div>
+
+@code {
+    private HubConnection? hubConnection;
+    private ChessGame chessGame = new();
+    private string hubUrlInput = string.Empty;
+    private string connectionStatus = "Connecting to server...";
+    private string errorMessage = string.Empty;
+    private string statusMessage = "Waiting for opponent...";
+    private string currentFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    private string myColor = string.Empty;
+    private string inputRoomId = string.Empty;
+    private string currentRoomCode = string.Empty;
+    private bool hasJoinedRoom;
+    private bool isGameReady;
+    private bool isConnecting;
+    private bool connectStarted;
+
+    private bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+
+    protected override void OnInitialized()
+    {
+        hubUrlInput = GetDefaultHubUrl();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || connectStarted)
+        {
+            return;
+        }
+
+        connectStarted = true;
+        await ConnectAsync();
+    }
+
+    private static string GetDefaultHubUrl()
+    {
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            return "http://10.0.2.2:5180/chessHub";
+        }
+
+        return "http://localhost:5180/chessHub";
+    }
+
+    private async Task ConnectAsync()
+    {
+        if (isConnecting)
+        {
+            return;
+        }
+
+        isConnecting = true;
+        errorMessage = string.Empty;
+        connectionStatus = "Connecting to server...";
+        await InvokeAsync(StateHasChanged);
+
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+            hubConnection = null;
+        }
+
+        var hubUrl = string.IsNullOrWhiteSpace(hubUrlInput) ? GetDefaultHubUrl() : hubUrlInput.Trim();
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(hubUrl)
+            .WithAutomaticReconnect()
+            .Build();
+
+        RegisterHubHandlers();
+
+        try
+        {
+            await hubConnection.StartAsync();
+            connectionStatus = "Connected to server.";
+        }
+        catch (Exception ex)
+        {
+            connectionStatus = "Could not connect. Check that the server is running and that you are using the right IP-address.";
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isConnecting = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void RegisterHubHandlers()
+    {
+        if (hubConnection is null)
+        {
+            return;
+        }
+
+        hubConnection.On<string>("AssignColor", color => InvokeAsync(() =>
+        {
+            myColor = color;
+            hasJoinedRoom = true;
+            isGameReady = false;
+            statusMessage = "Waiting for opponent...";
+            errorMessage = string.Empty;
+            StateHasChanged();
+        }));
+
+        hubConnection.On("GameStarted", () => InvokeAsync(() =>
+        {
+            isGameReady = true;
+            statusMessage = "Opponent has connected! Game is on.";
+            errorMessage = string.Empty;
+            StateHasChanged();
+        }));
+
+        hubConnection.On<string>("RoomError", msg => InvokeAsync(() =>
+        {
+            errorMessage = msg;
+            hasJoinedRoom = false;
+            StateHasChanged();
+        }));
+
+        hubConnection.On<string>("MoveError", msg => InvokeAsync(() =>
+        {
+            errorMessage = msg;
+            StateHasChanged();
+        }));
+
+        hubConnection.On<string>("ReceiveMove", newFen => InvokeAsync(() =>
+        {
+            currentFen = newFen;
+            chessGame = new ChessGame(newFen);
+            errorMessage = string.Empty;
+            StateHasChanged();
+        }));
+
+        hubConnection.On<string>("RoomDestroyed", msg => InvokeAsync(() =>
+        {
+            ResetGameState();
+            errorMessage = msg;
+            hasJoinedRoom = false;
+            currentRoomCode = string.Empty;
+            StateHasChanged();
+        }));
+    }
+
+    private void ResetGameState()
+    {
+        chessGame = new ChessGame();
+        currentFen = chessGame.GetFen();
+        myColor = string.Empty;
+        errorMessage = string.Empty;
+        isGameReady = false;
+        statusMessage = "Waiting for opponent...";
+    }
+
+    private async Task CreateRoom()
+    {
+        if (hubConnection is null || !IsConnected)
+        {
+            return;
+        }
+
+        errorMessage = string.Empty;
+        ResetGameState();
+        hasJoinedRoom = false;
+        currentRoomCode = await hubConnection.InvokeAsync<string>("CreateRoom");
+    }
+
+    private async Task JoinRoom()
+    {
+        if (string.IsNullOrWhiteSpace(inputRoomId) || hubConnection is null || !IsConnected)
+        {
+            return;
+        }
+
+        errorMessage = string.Empty;
+        ResetGameState();
+        currentRoomCode = inputRoomId.Trim().ToUpperInvariant();
+        await hubConnection.SendAsync("JoinRoom", currentRoomCode);
+    }
+
+    private async Task HandleMoveMade(string moveNotation)
+    {
+        if (!isGameReady)
+        {
+            errorMessage = "Game has not started yet, waiting for opponent.";
+            return;
+        }
+
+        var isMyTurn = (myColor == "White" && chessGame.WhoseTurn == Player.White) ||
+                       (myColor == "Black" && chessGame.WhoseTurn == Player.Black);
+        if (!isMyTurn)
+        {
+            errorMessage = $"It's not your turn. You're playing as {myColor}.";
+            return;
+        }
+
+        var parts = moveNotation.Split('-');
+        if (parts.Length != 2)
+        {
+            return;
+        }
+
+        try
+        {
+            var move = new Move(parts[0].ToUpperInvariant(), parts[1].ToUpperInvariant(), chessGame.WhoseTurn);
+            if (!chessGame.IsValidMove(move))
+            {
+                errorMessage = "Non valid move!";
+                return;
+            }
+
+            errorMessage = string.Empty;
+            if (hubConnection is not null)
+            {
+                await hubConnection.SendAsync("SendMove", currentRoomCode, new MoveRequest(parts[0], parts[1]));
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Could not make that move: {ex.Message}";
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+}
+

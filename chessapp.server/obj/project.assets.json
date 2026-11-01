@@ -187,6 +187,7 @@
         "net10.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -233,8 +234,11 @@
           "ChessDotNet": "1.0.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
           "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+          "Microsoft.AspNetCore.Components.WebView.Maui": "10.0.40",
           "Microsoft.AspNetCore.OpenApi": "10.0.14",
-          "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
+          "Microsoft.AspNetCore.SignalR.Client": "10.0.14",
+          "Microsoft.Extensions.Logging.Debug": "10.0.0",
+          "Microsoft.Maui.Controls": "(, )"
         },
         "imports": [
           "net461",
@@ -255,7 +259,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.403/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

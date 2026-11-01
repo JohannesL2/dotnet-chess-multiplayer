@@ -14,7 +14,7 @@
           "lib/netstandard1.3/ChessDotNet.dll": {}
         }
       },
-      "Microsoft.AspNetCore.App.Internal.Assets/10.0.12": {
+      "Microsoft.AspNetCore.App.Internal.Assets/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.AspNetCore.App.Internal.Assets.props": {},
@@ -658,13 +658,13 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/10.0.12": {
+      "Microsoft.NET.ILLink.Tasks/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.12": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -710,7 +710,7 @@
           "lib/netstandard1.3/ChessDotNet.dll": {}
         }
       },
-      "Microsoft.AspNetCore.App.Internal.Assets/10.0.12": {
+      "Microsoft.AspNetCore.App.Internal.Assets/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.AspNetCore.App.Internal.Assets.props": {},
@@ -1354,13 +1354,13 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/10.0.12": {
+      "Microsoft.NET.ILLink.Tasks/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.12": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -1407,10 +1407,10 @@
         "lib/netstandard1.3/ChessDotNet.dll"
       ]
     },
-    "Microsoft.AspNetCore.App.Internal.Assets/10.0.12": {
-      "sha512": "+sIBo9AMBZH46qHWHQdfzcGMt+RuBaPYrUMOAM9VjA7MQ9QtIez3lq1C3E05+Yroa94KKt3DSWaxmCI4H28a9Q==",
+    "Microsoft.AspNetCore.App.Internal.Assets/10.0.14": {
+      "sha512": "T1IOYbID1msKjQEh684HebnN+Xnq/pocMXDukOMZtzzPTf9c4/30+/JndM/1txrqwuSYqWvLiAQWzu4U93cshw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.app.internal.assets/10.0.12",
+      "path": "microsoft.aspnetcore.app.internal.assets/10.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1426,7 +1426,7 @@
         "build/Microsoft.AspNetCore.App.Internal.Assets.targets",
         "buildMultiTargeting/Microsoft.AspNetCore.App.Internal.Assets.targets",
         "buildTransitive/Microsoft.AspNetCore.App.Internal.Assets.targets",
-        "microsoft.aspnetcore.app.internal.assets.10.0.12.nupkg.sha512",
+        "microsoft.aspnetcore.app.internal.assets.10.0.14.nupkg.sha512",
         "microsoft.aspnetcore.app.internal.assets.nuspec"
       ]
     },
@@ -2494,10 +2494,10 @@
         "microsoft.jsinterop.webassembly.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/10.0.12": {
-      "sha512": "xi+BDjFpW+Sb+MHFHaH6Y/gV9I8BluFwRXc1QyCdoZbIK26eNiBeFuMTe/FMwc33G1wdHCyDg7CVTmb8OdQrMQ==",
+    "Microsoft.NET.ILLink.Tasks/10.0.14": {
+      "sha512": "YlTamXppEQls6DYWt7RdUuwWDb0lyw/vXCaGeQpLCpsLmfwGuCkOz/vIGgMTV7ECsJcavkCOkxZXv9s8rdAHkQ==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/10.0.12",
+      "path": "microsoft.net.illink.tasks/10.0.14",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2510,7 +2510,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
+        "microsoft.net.illink.tasks.10.0.14.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net/ILLink.Tasks.deps.json",
         "tools/net/ILLink.Tasks.dll",
@@ -2544,10 +2544,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.12": {
-      "sha512": "MIeBVeWkbKdggl3kmmIUnx8ZNEgjD2m1gTN/0W+TDRn6zcL1WZdq5hXhGQ0wjuSlw/8tvwwCg79PemfkJ3+5JA==",
+    "Microsoft.NET.Sdk.WebAssembly.Pack/10.0.14": {
+      "sha512": "kmmGbV2b97RTuBCVUUKB0wkaEuYn13O6TuCjqqe8+hrDxBkN1/yFTggSz7eqt70PsQbebsrHgUnirGzXsr0lzg==",
       "type": "package",
-      "path": "microsoft.net.sdk.webassembly.pack/10.0.12",
+      "path": "microsoft.net.sdk.webassembly.pack/10.0.14",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -2577,7 +2577,7 @@
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets",
         "build/Wasm.web.config",
         "build/browser.runtimeconfig.template.json",
-        "microsoft.net.sdk.webassembly.pack.10.0.12.nupkg.sha512",
+        "microsoft.net.sdk.webassembly.pack.10.0.14.nupkg.sha512",
         "microsoft.net.sdk.webassembly.pack.nuspec",
         "tools/net10.0/Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll",
         "tools/net10.0/Microsoft.NET.WebAssembly.Webcil.dll",
@@ -2622,12 +2622,12 @@
   "projectFileDependencyGroups": {
     "net10.0": [
       "ChessDotNet >= 1.0.0",
-      "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.12",
+      "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.14",
       "Microsoft.AspNetCore.Components.WebAssembly >= 10.0.14",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 10.0.14",
       "Microsoft.AspNetCore.SignalR.Client >= 10.0.14",
-      "Microsoft.NET.ILLink.Tasks >= 10.0.12",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 10.0.12",
+      "Microsoft.NET.ILLink.Tasks >= 10.0.14",
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 10.0.14",
       "chessapp.shared >= 1.0.0"
     ]
   },
@@ -2652,6 +2652,7 @@
         "net10.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2691,7 +2692,7 @@
           "Microsoft.AspNetCore.App.Internal.Assets": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.14, )",
             "autoReferenced": true
           },
           "Microsoft.AspNetCore.Components.WebAssembly": {
@@ -2713,13 +2714,13 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.14, )",
             "autoReferenced": true
           },
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.14, )",
             "autoReferenced": true
           }
         },
@@ -2727,8 +2728,11 @@
           "ChessDotNet": "1.0.0",
           "Microsoft.AspNetCore.Components.WebAssembly": "10.0.14",
           "Microsoft.AspNetCore.Components.WebAssembly.DevServer": "10.0.14",
+          "Microsoft.AspNetCore.Components.WebView.Maui": "10.0.40",
           "Microsoft.AspNetCore.OpenApi": "10.0.14",
-          "Microsoft.AspNetCore.SignalR.Client": "10.0.14"
+          "Microsoft.AspNetCore.SignalR.Client": "10.0.14",
+          "Microsoft.Extensions.Logging.Debug": "10.0.0",
+          "Microsoft.Maui.Controls": "(, )"
         },
         "imports": [
           "net461",
@@ -2744,7 +2748,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-            "version": "[10.0.12, 10.0.12]"
+            "version": "[10.0.14, 10.0.14]"
           }
         ],
         "frameworkReferences": {
@@ -2752,7 +2756,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.401/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.403/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
